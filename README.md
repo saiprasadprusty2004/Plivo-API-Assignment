@@ -14,7 +14,7 @@ PORT=3000
 
 PUBLIC_BASE_URL=https://your-url.ngrok-free.dev
 
-PLIVO_FROM_NUMBER=+918035736861 (Given by plivo in docs)
+PLIVO_FROM_NUMBER=(Given by plivo in docs)
 
 PLIVO_AUTH_ID=FillAuthID
 
@@ -22,7 +22,7 @@ PLIVO_AUTH_TOKEN=FillAutoToken
 
 CALL_OTP=1904 (My birthday is 19th april)
 
-DEFAULT_ASSOCIATE_NUMBER=+912264236412 (Given by plivo in mail)
+DEFAULT_ASSOCIATE_NUMBER=(Given by plivo in mail)
 
 AUDIO_URL=https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
 
