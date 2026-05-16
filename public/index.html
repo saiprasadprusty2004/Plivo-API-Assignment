@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plivo IVR Demo</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <main>
+      <h1>Plivo IVR Demo</h1>
+
+      <form id="call-form">
+        <label for="destinationNumber">Number to call</label>
+        <input id="destinationNumber" name="destinationNumber" type="tel" placeholder="+919876543210" required>
+
+        <label for="associateNumber">Associate number (optional)</label>
+        <input id="associateNumber" name="associateNumber" type="tel" placeholder="+912264236412">
+
+        <button type="submit">Start Call</button>
+      </form>
+
+      <button id="check-config" type="button">Check Config</button>
+      <pre id="status">Ready.</pre>
+    </main>
+
+    <script>
+      const form = document.querySelector("#call-form");
+      const statusBox = document.querySelector("#status");
+      const checkButton = document.querySelector("#check-config");
+
+      checkButton.addEventListener("click", async () => {
+        statusBox.textContent = "Checking config...";
+        try {
+          const response = await fetch("/api/config-check");
+          const data = await response.json();
+          statusBox.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+          statusBox.textContent = error.message;
+        }
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        statusBox.textContent = "Starting call...";
+
+        const payload = {
+          destinationNumber: form.destinationNumber.value,
+          associateNumber: form.associateNumber.value
+        };
+
+        try {
+          const response = await fetch("/api/call", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await response.json();
+          statusBox.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+          statusBox.textContent = error.message;
+        }
+      });
+    </script>
+  </body>
+</html>
