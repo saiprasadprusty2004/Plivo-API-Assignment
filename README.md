@@ -96,6 +96,7 @@ For the assignment demo:
 
 ## Project Structure
 
+```text
 server.js
 public/
   index.html
@@ -103,5 +104,6 @@ public/
 .env.example
 package.json
 README.md
+```
 
 
